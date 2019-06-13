@@ -4,6 +4,18 @@ import { RouterModule } from '@angular/router';
 @NgModule({
     imports: [
         RouterModule.forChild([
+            {
+                path: 'student',
+                loadChildren: './student/student.module#SlmanagerStudentModule'
+            },
+            {
+                path: 'professor',
+                loadChildren: './professor/professor.module#SlmanagerProfessorModule'
+            },
+            {
+                path: 'lecture',
+                loadChildren: './lecture/lecture.module#SlmanagerLectureModule'
+            }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])
     ],
