@@ -28,6 +28,7 @@ export class StudentUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     firstNameInput = element(by.id('field_firstName'));
     lastNameInput = element(by.id('field_lastName'));
+    enrolledOnSelect = element(by.id('field_enrolledOn'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -47,6 +48,25 @@ export class StudentUpdatePage {
 
     async getLastNameInput() {
         return this.lastNameInput.getAttribute('value');
+    }
+
+    async enrolledOnSelectLastOption() {
+        await this.enrolledOnSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async enrolledOnSelectOption(option) {
+        await this.enrolledOnSelect.sendKeys(option);
+    }
+
+    getEnrolledOnSelect(): ElementFinder {
+        return this.enrolledOnSelect;
+    }
+
+    async getEnrolledOnSelectedOption() {
+        return this.enrolledOnSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

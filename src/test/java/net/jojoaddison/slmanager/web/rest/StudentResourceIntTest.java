@@ -10,6 +10,7 @@ import net.jojoaddison.slmanager.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,6 +54,9 @@ public class StudentResourceIntTest {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Mock
+    private StudentRepository studentRepositoryMock;
 
     /**
      * This repository is mocked in the net.jojoaddison.slmanager.repository.search test package.
@@ -198,6 +203,39 @@ public class StudentResourceIntTest {
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllStudentsWithEagerRelationshipsIsEnabled() throws Exception {
+        StudentResource studentResource = new StudentResource(studentRepositoryMock, mockStudentSearchRepository);
+        when(studentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restStudentMockMvc = MockMvcBuilders.standaloneSetup(studentResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restStudentMockMvc.perform(get("/api/students?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(studentRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllStudentsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        StudentResource studentResource = new StudentResource(studentRepositoryMock, mockStudentSearchRepository);
+            when(studentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restStudentMockMvc = MockMvcBuilders.standaloneSetup(studentResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restStudentMockMvc.perform(get("/api/students?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(studentRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     public void getStudent() throws Exception {
         // Initialize the database
