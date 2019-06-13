@@ -1,0 +1,21 @@
+version: '2'
+services:
+    slmanager-app:
+        image: slmanager
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATA_MONGODB_URI=mongodb://slmanager-mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=slmanager
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_JEST_URI=http://slmanager-elasticsearch:9200
+        ports:
+            - 8080:8080
+    slmanager-mongodb:
+        extends:
+            file: mongodb.yml
+            service: slmanager-mongodb
+    slmanager-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: slmanager-elasticsearch

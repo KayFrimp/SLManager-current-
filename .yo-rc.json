@@ -1,0 +1,38 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "net.jojoaddison.slmanager",
+            "nativeLanguage": "en"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "slmanager",
+        "packageName": "net.jojoaddison.slmanager",
+        "packageFolder": "net/jojoaddison/slmanager",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": false,
+        "websocket": false,
+        "databaseType": "mongodb",
+        "devDatabaseType": "mongodb",
+        "prodDatabaseType": "mongodb",
+        "searchEngine": "elasticsearch",
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "OTY5M2UwMjhlMjZjMzhkYThiNDYzOWU2NjJiZDRmYzBhMGE0NDNlYjk0OWI2YzBmMWZjOWY1MGVjMmM4ZmJlM2M2MGJkNWZmNDIyZGEwMjhjNjI4OWIzMTllNzkwODcwN2YwYTUwMGU1NzI4ZjkyM2JlYzk4NWViZWNkODY0MWQ=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["gatling", "cucumber", "protractor"],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "en",
+        "languages": ["en"]
+    }
+}
