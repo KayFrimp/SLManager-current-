@@ -8,8 +8,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -33,10 +31,6 @@ public class Student implements Serializable {
     @Size(min = 3)
     @Field("last_name")
     private String lastName;
-
-    @DBRef
-    @Field("enrolledOns")
-    private Set<Lecture> enrolledOns = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -71,31 +65,6 @@ public class Student implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Set<Lecture> getEnrolledOns() {
-        return enrolledOns;
-    }
-
-    public Student enrolledOns(Set<Lecture> lectures) {
-        this.enrolledOns = lectures;
-        return this;
-    }
-
-    public Student addEnrolledOn(Lecture lecture) {
-        this.enrolledOns.add(lecture);
-        lecture.getRegisteredBies().add(this);
-        return this;
-    }
-
-    public Student removeEnrolledOn(Lecture lecture) {
-        this.enrolledOns.remove(lecture);
-        lecture.getRegisteredBies().remove(this);
-        return this;
-    }
-
-    public void setEnrolledOns(Set<Lecture> lectures) {
-        this.enrolledOns = lectures;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

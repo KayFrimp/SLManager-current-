@@ -39,11 +39,7 @@ describe('Student e2e test', () => {
         const nbButtonsBeforeCreate = await studentComponentsPage.countDeleteButtons();
 
         await studentComponentsPage.clickOnCreateButton();
-        await promise.all([
-            studentUpdatePage.setFirstNameInput('firstName'),
-            studentUpdatePage.setLastNameInput('lastName')
-            // studentUpdatePage.enrolledOnSelectLastOption(),
-        ]);
+        await promise.all([studentUpdatePage.setFirstNameInput('firstName'), studentUpdatePage.setLastNameInput('lastName')]);
         expect(await studentUpdatePage.getFirstNameInput()).to.eq('firstName');
         expect(await studentUpdatePage.getLastNameInput()).to.eq('lastName');
         await studentUpdatePage.save();
