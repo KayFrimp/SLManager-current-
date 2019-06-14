@@ -24,6 +24,11 @@ public class InitialSetupMigration {
         userAuthority.setName(AuthoritiesConstants.USER);
         mongoTemplate.save(adminAuthority);
         mongoTemplate.save(userAuthority);
+
+        //ADDING PROFESSOR ROLE INTO DATABASE SETUP
+        Authority professorAuthority = new Authority();
+        professorAuthority.setName(AuthoritiesConstants.PROFESSOR);
+        mongoTemplate.save(professorAuthority);
     }
 
     @ChangeSet(order = "02", author = "initiator", id = "02-addUsers")
