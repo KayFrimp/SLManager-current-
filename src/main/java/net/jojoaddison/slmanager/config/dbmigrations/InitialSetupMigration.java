@@ -16,7 +16,7 @@ import java.time.Instant;
 @ChangeLog(order = "002")
 public class InitialSetupMigration {
 
-    @ChangeSet(order = "01", author = "initiator", id = "02-addAuthorities")
+    @ChangeSet(order = "01", author = "initiator", id = "03-addAuthorities")
     public void addAuthorities(MongoTemplate mongoTemplate) {
         Authority adminAuthority = new Authority();
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
@@ -29,6 +29,11 @@ public class InitialSetupMigration {
         Authority professorAuthority = new Authority();
         professorAuthority.setName(AuthoritiesConstants.PROFESSOR);
         mongoTemplate.save(professorAuthority);
+
+        //ADDING STUDENT ROLE INTO DATABASE SETUP
+        Authority studentAuthority = new Authority();
+        studentAuthority.setName(AuthoritiesConstants.STUDENT);
+        mongoTemplate.save(studentAuthority);
     }
 
     @ChangeSet(order = "02", author = "initiator", id = "02-addUsers")
