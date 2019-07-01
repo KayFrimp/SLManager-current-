@@ -13,10 +13,10 @@ import java.time.Instant;
 /**
  * Creates the initial database setup
  */
-@ChangeLog(order = "001")
+@ChangeLog(order = "002")
 public class InitialSetupMigration {
 
-    @ChangeSet(order = "01", author = "initiator", id = "01-addAuthorities")
+    @ChangeSet(order = "01", author = "initiator", id = "02-addAuthorities")
     public void addAuthorities(MongoTemplate mongoTemplate) {
         Authority adminAuthority = new Authority();
         adminAuthority.setName(AuthoritiesConstants.ADMIN);

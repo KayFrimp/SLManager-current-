@@ -28,6 +28,8 @@ export class UserMgmtUpdateComponent implements OnInit {
         this.authorities = [];
         this.userService.authorities().subscribe(authorities => {
             this.authorities = authorities;
+            console.log('authorities');
+            console.log(authorities);
         });
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
