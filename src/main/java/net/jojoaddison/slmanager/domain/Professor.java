@@ -1,6 +1,7 @@
 package net.jojoaddison.slmanager.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,6 +34,9 @@ public class Professor implements Serializable {
     @Field("last_name")
     private String lastName;
 
+    @DBRef
+    @Field("teaches")
+    private Set<Lecture> teaches = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -64,6 +70,31 @@ public class Professor implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Lecture> getTeaches() {
+        return teaches;
+    }
+
+    public Professor teaches(Set<Lecture> lectures) {
+        this.teaches = lectures;
+        return this;
+    }
+
+    public Professor addTeaches(Lecture lecture) {
+        this.teaches.add(lecture);
+        lecture.setEntitledTo(this);
+        return this;
+    }
+
+    public Professor removeTeaches(Lecture lecture) {
+        boolean remove = this.teaches.remove(lecture);
+        lecture.setEntitledTo(null);
+        return this;
+    }
+
+    public void setTeaches(Set<Lecture> lectures) {
+        this.teaches = lectures;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

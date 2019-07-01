@@ -17,7 +17,8 @@
                 "title": "Professor"
             },
             "firstName": "First Name",
-            "lastName": "Last Name"
+            "lastName": "Last Name",
+            "teaches": "Teaches"
         }
     }
 }
