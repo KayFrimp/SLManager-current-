@@ -13,6 +13,12 @@
                 <dd>
                     <span>{{student.lastName}}</span>
                 </dd>
+                <dt><span jhiTranslate="slmanagerApp.student.lecture">Lecture</span></dt>
+                <dd>
+                    <span *ngFor="let lecture of student.lectures; let last = last">
+                        <a [routerLink]="['/lecture', lecture?.id, 'view' ]">{{lecture.courseName}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

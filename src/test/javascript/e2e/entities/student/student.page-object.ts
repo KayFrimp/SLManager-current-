@@ -28,6 +28,7 @@ export class StudentUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     firstNameInput = element(by.id('field_firstName'));
     lastNameInput = element(by.id('field_lastName'));
+    lectureSelect = element(by.id('field_lecture'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -47,6 +48,25 @@ export class StudentUpdatePage {
 
     async getLastNameInput() {
         return this.lastNameInput.getAttribute('value');
+    }
+
+    async lectureSelectLastOption() {
+        await this.lectureSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async lectureSelectOption(option) {
+        await this.lectureSelect.sendKeys(option);
+    }
+
+    getLectureSelect(): ElementFinder {
+        return this.lectureSelect;
+    }
+
+    async getLectureSelectedOption() {
+        return this.lectureSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

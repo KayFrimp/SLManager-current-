@@ -3,10 +3,10 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "teaches",
+            "relationshipName": "lecture",
             "otherEntityName": "lecture",
             "relationshipType": "one-to-many",
-            "otherEntityRelationshipName": "entitledTo",
+            "otherEntityRelationshipName": "professor",
             "otherEntityRelationshipNameUndefined": false
         }
     ],

@@ -40,6 +40,12 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label jhiTranslate="slmanagerApp.student.lecture" for="field_lecture">Lecture</label>
+                    <select class="form-control" id="field_lecture" multiple name="lecture" [(ngModel)]="student.lectures">
+                        <option [ngValue]="getSelected(student.lectures, lectureOption)" *ngFor="let lectureOption of lectures; trackBy: trackLectureById">{{lectureOption.courseName}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

@@ -1,7 +1,17 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "lecture",
+            "otherEntityName": "lecture",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "courseName",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "student",
+            "otherEntityRelationshipNameUndefined": false
+        }
+    ],
     "fields": [
         {
             "fieldName": "firstName",

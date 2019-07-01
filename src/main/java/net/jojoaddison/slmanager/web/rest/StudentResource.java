@@ -92,13 +92,19 @@ public class StudentResource {
      * GET  /students : get all the students.
      *
      * @param pageable the pagination information
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of students in body
      */
     @GetMapping("/students")
-    public ResponseEntity<List<Student>> getAllStudents(Pageable pageable) {
+    public ResponseEntity<List<Student>> getAllStudents(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Students");
-        Page<Student> page = studentRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/students");
+        Page<Student> page;
+        if (eagerload) {
+            page = studentRepository.findAllWithEagerRelationships(pageable);
+        } else {
+            page = studentRepository.findAll(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/students?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -111,7 +117,7 @@ public class StudentResource {
     @GetMapping("/students/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable String id) {
         log.debug("REST request to get Student : {}", id);
-        Optional<Student> student = studentRepository.findById(id);
+        Optional<Student> student = studentRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(student);
     }
 

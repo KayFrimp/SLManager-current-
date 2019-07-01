@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Lecture.
@@ -29,6 +32,10 @@ public class Lecture implements Serializable {
     @NotNull
     @Field("credit_hours")
     private Integer creditHours;
+
+    @DBRef
+    @Field("students")
+    private Set<Student> students = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -64,7 +71,31 @@ public class Lecture implements Serializable {
     public void setCreditHours(Integer creditHours) {
         this.creditHours = creditHours;
     }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public Lecture students(Set<Student> students) {
+        this.students = students;
+        return this;
+    }
+
+    public Lecture addStudents(Student student) {
+        this.students.add(student);
+        student.getLectures().add(this);
+        return this;
+    }
+
+    public Lecture removeStudents(Student student) {
+        this.students.remove(student);
+        student.getLectures().remove(this);
+        return this;
+    }
+
+    public void setStudents(Set<Student> students){ this.students = students; }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {
@@ -94,4 +125,5 @@ public class Lecture implements Serializable {
             ", creditHours=" + getCreditHours() +
             "}";
     }
+
 }

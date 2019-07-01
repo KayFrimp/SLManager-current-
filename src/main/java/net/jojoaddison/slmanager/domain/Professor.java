@@ -35,8 +35,8 @@ public class Professor implements Serializable {
     private String lastName;
 
     @DBRef
-    @Field("teaches")
-    private Set<Lecture> teaches = new HashSet<>();
+    @Field("lecture")
+    private Set<Lecture> lectures = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -72,29 +72,29 @@ public class Professor implements Serializable {
         this.lastName = lastName;
     }
 
-    public Set<Lecture> getTeaches() {
-        return teaches;
+    public Set<Lecture> getLectures() {
+        return lectures;
     }
 
-    public Professor teaches(Set<Lecture> lectures) {
-        this.teaches = lectures;
+    public Professor lectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
         return this;
     }
 
-    public Professor addTeaches(Lecture lecture) {
-        this.teaches.add(lecture);
-        lecture.setEntitledTo(this);
+    public Professor addLecture(Lecture lecture) {
+        this.lectures.add(lecture);
+        //lecture.setProfessor(this);
         return this;
     }
 
-    public Professor removeTeaches(Lecture lecture) {
-        boolean remove = this.teaches.remove(lecture);
-        lecture.setEntitledTo(null);
+    public Professor removeLecture(Lecture lecture) {
+        this.lectures.remove(lecture);
+        //lecture.setProfessor(null);
         return this;
     }
 
-    public void setTeaches(Set<Lecture> lectures) {
-        this.teaches = lectures;
+    public void setLectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

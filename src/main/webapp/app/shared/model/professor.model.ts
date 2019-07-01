@@ -4,9 +4,9 @@ export interface IProfessor {
     id?: string;
     firstName?: string;
     lastName?: string;
-    teaches?: ILecture[];
+    lectures?: ILecture[];
 }
 
 export class Professor implements IProfessor {
-    constructor(public id?: string, public firstName?: string, public lastName?: string, public teaches?: ILecture[]) {}
+    constructor(public id?: string, public firstName?: string, public lastName?: string, public lectures?: ILecture[]) {}
 }
